@@ -3,15 +3,14 @@ import { Injectable } from '@nestjs/common'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 import { ConfigService } from '@nestjs/config'
 import { InjectModel } from '@nestjs/sequelize'
-import { UserModel } from '../../user/user.model'
 import { AuthModel } from '../auth.model'
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
 	constructor(
 		private readonly configService: ConfigService,
-		@InjectModel(UserModel)
-		private readonly authModel: typeof UserModel
+		@InjectModel(AuthModel)
+		private readonly authModel: typeof AuthModel
 	) {
 		super({
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
